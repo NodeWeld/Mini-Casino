@@ -1,0 +1,290 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --vegas-bg: #0a0010;
+  --vegas-purple: #a855f7;
+  --vegas-pink: #ec4899;
+  --vegas-gold: #ffd700;
+  --vegas-cyan: #22d3ee;
+  --vegas-felt: #0d3d24;
+  --felt-highlight: #1a6b45;
+  --felt-shadow: #051a10;
+  --leather: #1c1410;
+  --leather-light: #3d2e22;
+  --chrome: #c8cdd4;
+  --cabinet-red: #6b1c1c;
+  --cabinet-dark: #2d0a0a;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--vegas-bg);
+  color: #f0e6ff;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Subtle felt weave — no external assets */
+.casino-felt {
+  background-color: var(--vegas-felt);
+  background-image:
+    radial-gradient(ellipse 120% 80% at 50% 40%, rgba(26, 107, 69, 0.35) 0%, transparent 55%),
+    repeating-linear-gradient(
+      90deg,
+      transparent,
+      transparent 2px,
+      rgba(0, 0, 0, 0.04) 2px,
+      rgba(0, 0, 0, 0.04) 3px
+    ),
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(255, 255, 255, 0.02) 2px,
+      rgba(255, 255, 255, 0.02) 3px
+    ),
+    linear-gradient(165deg, var(--felt-highlight) 0%, var(--vegas-felt) 42%, var(--felt-shadow) 100%);
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.06),
+    inset 0 2px 24px rgba(0, 0, 0, 0.35),
+    0 8px 32px rgba(0, 0, 0, 0.5);
+}
+
+.casino-table-wrap {
+  border-radius: 1rem;
+  padding: 10px;
+  background: linear-gradient(145deg, var(--leather-light) 0%, var(--leather) 40%, #0f0b08 100%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    0 12px 40px rgba(0, 0, 0, 0.65),
+    0 0 0 2px #0a0806;
+}
+
+.casino-table-inner {
+  border-radius: 0.65rem;
+  overflow: hidden;
+}
+
+/* Classic slot cabinet */
+.slot-cabinet {
+  background: linear-gradient(
+    180deg,
+    #4a1518 0%,
+    var(--cabinet-red) 18%,
+    #5a2024 45%,
+    var(--cabinet-dark) 78%,
+    #1a0505 100%
+  );
+  border-radius: 0.75rem;
+  padding: 0.65rem;
+  box-shadow:
+    inset 0 2px 0 rgba(255, 255, 255, 0.12),
+    inset 0 -3px 8px rgba(0, 0, 0, 0.5),
+    0 4px 0 #2d0a0a,
+    0 12px 28px rgba(0, 0, 0, 0.7),
+    0 0 0 2px #1a0a0a;
+}
+
+.slot-cabinet-marquee {
+  background: linear-gradient(180deg, #1a1a1a 0%, #0d0d0d 100%);
+  border: 2px solid #3d3d3d;
+  border-radius: 0.35rem;
+  box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.8), 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+.slot-window-well {
+  background: linear-gradient(180deg, #050505 0%, #121212 40%, #000 100%);
+  border-radius: 0.5rem;
+  padding: 0.5rem 0.65rem 0.65rem;
+  box-shadow:
+    inset 0 4px 16px rgba(0, 0, 0, 0.95),
+    inset 0 0 0 2px #1f1f1f,
+    0 1px 0 rgba(255, 255, 255, 0.05);
+  border: 3px solid;
+  border-color: #6b7280 #374151 #1f2937 #9ca3af;
+}
+
+.slot-chrome-bezel {
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.45),
+    inset 0 -2px 4px rgba(0, 0, 0, 0.4),
+    0 0 0 1px #0a0a0a;
+  background: linear-gradient(145deg, #e5e7eb 0%, #9ca3af 35%, #6b7280 70%, #d1d5db 100%);
+  border-radius: 0.25rem;
+}
+
+@keyframes reelBlur {
+  0% {
+    filter: blur(0);
+    transform: translateY(0);
+  }
+  50% {
+    filter: blur(2px);
+    transform: translateY(-4px);
+  }
+  100% {
+    filter: blur(0);
+    transform: translateY(0);
+  }
+}
+
+@keyframes cardDeal {
+  0% {
+    transform: translate(120%, -80%) rotate(25deg) scale(0.6);
+    opacity: 0;
+  }
+  70% {
+    opacity: 1;
+  }
+  100% {
+    transform: translate(0, 0) rotate(0) scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes balanceFlashWin {
+  0%,
+  100% {
+    color: #f0e6ff;
+    text-shadow: none;
+  }
+  50% {
+    color: #ffd700;
+    text-shadow: 0 0 12px #ffd700, 0 0 24px rgba(255, 215, 0, 0.6);
+  }
+}
+
+@keyframes balanceFlashLose {
+  0%,
+  100% {
+    color: #f0e6ff;
+    text-shadow: none;
+  }
+  50% {
+    color: #f87171;
+    text-shadow: 0 0 10px #ef4444;
+  }
+}
+
+@keyframes sparkle {
+  0%,
+  100% {
+    opacity: 0;
+    transform: scale(0) translate(0, 0);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1) translate(var(--sx), var(--sy));
+  }
+}
+
+.neon-border-active {
+  animation: neonPulse 2s ease-in-out infinite;
+}
+
+@keyframes neonPulse {
+  0%,
+  100% {
+    box-shadow:
+      0 0 8px var(--vegas-purple),
+      0 0 16px rgba(168, 85, 247, 0.35),
+      inset 0 0 12px rgba(168, 85, 247, 0.08);
+  }
+  50% {
+    box-shadow:
+      0 0 14px var(--vegas-pink),
+      0 0 28px rgba(236, 72, 153, 0.45),
+      inset 0 0 16px rgba(236, 72, 153, 0.1);
+  }
+}
+
+.btn-neon {
+  @apply transition-all duration-200 rounded-lg border-2 font-display tracking-wide uppercase;
+  border-color: rgba(168, 85, 247, 0.7);
+  box-shadow: 0 0 8px rgba(168, 85, 247, 0.35);
+}
+
+.btn-neon:hover:not(:disabled) {
+  border-color: #ec4899;
+  box-shadow:
+    0 0 14px rgba(236, 72, 153, 0.55),
+    0 0 24px rgba(168, 85, 247, 0.35);
+  transform: translateY(-1px);
+}
+
+.btn-neon:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+/* Legacy alias — same treatment as casino felt */
+.felt-surface {
+  background-color: var(--vegas-felt);
+  background-image:
+    radial-gradient(ellipse 120% 80% at 50% 40%, rgba(26, 107, 69, 0.35) 0%, transparent 55%),
+    repeating-linear-gradient(
+      90deg,
+      transparent,
+      transparent 2px,
+      rgba(0, 0, 0, 0.04) 2px,
+      rgba(0, 0, 0, 0.04) 3px
+    ),
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(255, 255, 255, 0.02) 2px,
+      rgba(255, 255, 255, 0.02) 3px
+    ),
+    linear-gradient(165deg, var(--felt-highlight) 0%, var(--vegas-felt) 42%, var(--felt-shadow) 100%);
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.06),
+    inset 0 2px 24px rgba(0, 0, 0, 0.35),
+    0 8px 32px rgba(0, 0, 0, 0.5);
+}
+
+.reel-spinning .reel-inner {
+  animation: reelBlur 0.12s ease-in-out infinite;
+}
+
+.card-deal-anim {
+  animation: cardDeal 0.45s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.balance-flash-win {
+  animation: balanceFlashWin 0.6s ease-out 2;
+}
+
+.balance-flash-lose {
+  animation: balanceFlashLose 0.6s ease-out 2;
+}
+
+.sparkle-layer {
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  overflow: hidden;
+}
+
+.sparkle-layer span {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #ffd700;
+  box-shadow: 0 0 8px #ffd700, 0 0 16px #ec4899;
+  animation: sparkle 1.2s ease-out forwards;
+}
+
+.roulette-wood-bowl {
+  background:
+    radial-gradient(ellipse 70% 55% at 40% 35%, rgba(90, 60, 40, 0.5) 0%, transparent 50%),
+    radial-gradient(circle at 50% 100%, #0a0604 0%, #1a0f0a 35%, #3d2818 70%, #1f120c 100%);
+  box-shadow:
+    inset 0 8px 24px rgba(0, 0, 0, 0.65),
+    inset 0 -4px 12px rgba(255, 255, 255, 0.04),
+    0 16px 48px rgba(0, 0, 0, 0.8);
+}
